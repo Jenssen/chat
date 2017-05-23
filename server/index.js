@@ -1,9 +1,10 @@
-import Nuxt from 'nuxt'
-import express from 'express'
-
 import api from './api'
 
-const app = express()
+const Nuxt = require('nuxt')
+const app = require('express')()
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
+
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 
@@ -30,9 +31,23 @@ async function start () {
       process.exit(1)
     }
   }
+
   // Listen the server
-  app.listen(port, host)
+  server.listen(port, host)
   console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
+
+  let users = ['Admin', 'John']
+  // Socket io
+  io.on('connection', function (socket) {
+    console.log('A User with ID: ' + socket.id + ' joined')
+
+    socket.on('last-messages', function (fn) {
+      fn(users)
+    })
+    socket.on('disconnect', function () {
+      console.log('User ' + socket.id + ' disconnected')
+    })
+  })
 }
 
 start()

@@ -3,7 +3,7 @@
     <div class="main">
       <p class="user-header has-text-centered"><b>Users</b></p>
       <hr>
-      <p>Admin</p>
+      <p></p>
     </div>
   </div>
 </template>

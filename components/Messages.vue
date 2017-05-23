@@ -2,7 +2,7 @@
   <div class="column is-11-desktop is-offset-1-desktop">
     <div class="main">
       <div class="messages">
-        <p>This is the second column</p>
+        <p></p>
       </div>
 
       <div class="footer-container">
