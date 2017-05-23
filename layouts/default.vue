@@ -1,52 +1,27 @@
 <template>
-  <div>
+  <section class="hero is-fullheight">
     <nuxt/>
-    <my-footer/>
-  </div>
+  </section>
 </template>
 
 <script>
-import MyFooter from '~components/Footer.vue'
 
 export default {
-  components: {
-    MyFooter
-  }
+
 }
 </script>
 
 <style>
-.container
-{
+  html,
+  body {
+  height: 100%;
+  padding: 0;
   margin: 0;
-  width: 100%;
-  padding: 100px 0;
-  text-align: center;
-}
+  color: #42b983;
+  background-color: #282828;
+  }
 
-.button, .button:visited
-{
-  display: inline-block;
-  color: black;
-  letter-spacing: 1px;
-  background-color: #fff;
-  border: 2px solid #000;
-  text-decoration: none;
-  text-transform: uppercase;
-  padding: 15px 45px;
-}
-
-.button:hover, .button:focus
-{
-  color: #fff;
-  background-color: #000;
-}
-
-.title
-{
-  color: #000;
-  font-weight: 300;
-  font-size: 2.5em;
-  margin: 0;
-}
+  .hero {
+    background-color: #282828;
+  }
 </style>

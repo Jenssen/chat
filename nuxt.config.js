@@ -16,7 +16,7 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: ['~assets/css/main.css'],
+  css: ['bulma/css/bulma.css', '~assets/css/main.css'],
   /*
   ** Add axios globally
   */
