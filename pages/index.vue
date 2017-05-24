@@ -1,5 +1,6 @@
 <template>
   <div class="columns is-mobile is-gapless">
+    <p> {{ messages }} </p>
     <user-list/>
     <messages/>
   </div>
@@ -18,18 +19,17 @@ export default {
   },
   asyncData (context, callback) {
     socket.emit('last-messages', function (messages) {
-      callback(null, {
-        messages,
-        message: ''
-      })
-      console.log(messages)
+      callback(null, { messages, message: '' })
+    })
+    socket.emit('active-users', { userId: socket.id }, function (users) {
+      callback(null, { users, user: '' })
     })
   },
   created () {
 
   },
   beforeMount () {
-
+    console.log(this.users)
   },
   head () {
     return {

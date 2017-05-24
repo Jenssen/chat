@@ -41,6 +41,14 @@ async function start () {
   io.on('connection', function (socket) {
     console.log('A User with ID: ' + socket.id + ' joined')
 
+    socket.emit('hello', 'can you hear me?', 1, 2, 'abc')
+
+    socket.on('active-users', function (userId, fn) {
+      users.push(userId.userId)
+      console.log(userId)
+      fn(users)
+    })
+
     socket.on('last-messages', function (fn) {
       fn(users)
     })
