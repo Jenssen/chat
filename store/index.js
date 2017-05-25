@@ -5,14 +5,16 @@ const store = () => {
     state: {
       users: ['Admin', 'Linda'],
       messages: [],
-      clients: []
+      clientsId: [],
+      totalUsers: 0
     },
     mutations: {
       addMessage (state, message) {
         state.messages.push(message)
       },
       addClients (state, clients) {
-        state.clients = clients
+        state.clientsId = clients
+        state.totalUsers = clients.length - 1
       }
     }
   })

@@ -20,10 +20,11 @@ export default {
 
   },
   beforeMount () {
+    socket.emit('new-user')
     socket.on('new-message', (message) => {
       this.$store.commit('addMessage', message)
     })
-    socket.on('new-user', (clients) => {
+    socket.on('accept-clients', (clients) => {
       this.$store.commit('addClients', clients)
     })
   },

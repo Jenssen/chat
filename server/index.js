@@ -44,7 +44,9 @@ async function start () {
       activeClients = clients
       console.log(activeClients)
     })
-    io.emit('new-user', activeClients)
+    socket.on('new-user', () => {
+      io.emit('accept-clients', activeClients)
+    })
     socket.on('send-message', (message) => {
       io.emit('new-message', message)
     })
