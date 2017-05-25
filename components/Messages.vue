@@ -2,13 +2,13 @@
   <div class="column is-11-desktop is-offset-1-desktop">
     <div class="main">
       <div class="messages">
-        <p></p>
+        <p>{{ $store.state.messages }}</p>
       </div>
 
       <div class="footer-container">
         <div class="field">
           <p class="control">
-            <input class="input" type="text" placeholder="Write something">
+            <input class="input" type="text" v-model="message" @keyup.enter="emitMessage" placeholder="...">
           </p>
         </div>
       </div>
@@ -19,7 +19,18 @@
 
 <script>
 export default {
-  name: 'messages'
+  name: 'messages',
+  data: () => {
+    return {
+      message: ''
+    }
+  },
+  methods: {
+    emitMessage () {
+      this.$emit('emitMessage', this.message)
+      this.message = ''
+    }
+  }
 }
 </script>
 

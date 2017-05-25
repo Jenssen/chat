@@ -36,24 +36,20 @@ async function start () {
   server.listen(port, host)
   console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
 
-  let users = ['Admin', 'John']
   // Socket io
-  io.on('connection', function (socket) {
-    console.log('A User with ID: ' + socket.id + ' joined')
-
-    socket.emit('hello', 'can you hear me?', 1, 2, 'abc')
-
-    socket.on('active-users', function (userId, fn) {
-      users.push(userId.userId)
-      console.log(userId)
-      fn(users)
+  let activeClients = ''
+  io.on('connection', (socket) => {
+    io.clients(function (error, clients) {
+      if (error) throw error
+      activeClients = clients
+      console.log(activeClients)
     })
-
-    socket.on('last-messages', function (fn) {
-      fn(users)
+    io.emit('new-user', activeClients)
+    socket.on('send-message', (message) => {
+      io.emit('new-message', message)
     })
-    socket.on('disconnect', function () {
-      console.log('User ' + socket.id + ' disconnected')
+    socket.on('disconnect', () => {
+      console.log(socket.id + 'disconnected')
     })
   })
 }

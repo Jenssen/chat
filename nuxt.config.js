@@ -21,7 +21,6 @@ module.exports = {
   ** Add axios globally
   */
   build: {
-    vendor: ['socket.io-client'],
     /*
     ** Run ESLINT on save
     */
@@ -35,5 +34,6 @@ module.exports = {
         })
       }
     }
-  }
+  },
+  plugins: ['~plugins/socket.io.js']
 }

@@ -1,8 +1,7 @@
 <template>
   <div class="columns is-mobile is-gapless">
-    <p> {{ messages }} </p>
     <user-list/>
-    <messages/>
+    <messages @emitMessage="sendMessage"/>
   </div>
 </template>
 
@@ -17,19 +16,21 @@ export default {
     UserList,
     Messages
   },
-  asyncData (context, callback) {
-    socket.emit('last-messages', function (messages) {
-      callback(null, { messages, message: '' })
-    })
-    socket.emit('active-users', { userId: socket.id }, function (users) {
-      callback(null, { users, user: '' })
-    })
-  },
   created () {
 
   },
   beforeMount () {
-    console.log(this.users)
+    socket.on('new-message', (message) => {
+      this.$store.commit('addMessage', message)
+    })
+    socket.on('new-user', (clients) => {
+      this.$store.commit('addClients', clients)
+    })
+  },
+  methods: {
+    sendMessage (message) {
+      socket.emit('send-message', message)
+    }
   },
   head () {
     return {

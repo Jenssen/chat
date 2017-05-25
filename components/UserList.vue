@@ -3,7 +3,7 @@
     <div class="main">
       <p class="user-header has-text-centered"><b>Users</b></p>
       <hr>
-      <p></p>
+      <p>{{ $store.state.clients }}</p>
     </div>
   </div>
 </template>
