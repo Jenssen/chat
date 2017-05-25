@@ -1,4 +1,5 @@
 import Vuex from 'vuex'
+import moment from 'moment'
 
 const store = () => {
   return new Vuex.Store({
@@ -10,7 +11,12 @@ const store = () => {
     },
     mutations: {
       addMessage (state, message) {
-        state.messages.push(message)
+        console.log('fire!')
+        state.messages.push({
+          message: message,
+          time: moment()
+        })
+        console.log(state.messages)
       },
       addClients (state, clients) {
         state.clientsId = clients
