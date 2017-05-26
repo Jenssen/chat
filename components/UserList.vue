@@ -3,14 +3,19 @@
     <div class="main">
       <p class="user-header has-text-centered"><b>Users</b></p>
       <hr>
-      <p>{{ $store.state.totalUsers }}</p>
+      <p v-for="user in users" class="">
+        {{ user.username }}
+      </p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'user-list'
+  name: 'user-list',
+  computed: {
+    users () { return this.$store.state.users }
+  }
 }
 </script>
 

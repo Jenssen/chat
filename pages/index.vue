@@ -1,6 +1,8 @@
 <template>
   <div class="columns is-mobile is-gapless">
+    <modal @newUser="addNewUser"/>
     <user-list/>
+    {{ activeUsers }}
     <messages @emitMessage="sendMessage"/>
   </div>
 </template>
@@ -10,27 +12,31 @@ import socket from '~plugins/socket.io.js'
 
 import Messages from '~components/Messages.vue'
 import UserList from '~components/UserList.vue'
+import Modal from '~components/Modal.vue'
+
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
     UserList,
-    Messages
+    Messages,
+    Modal
   },
-  created () {
-
-  },
+  computed: mapGetters(['activeUsers']),
   beforeMount () {
-    socket.emit('new-user')
     socket.on('new-message', (message) => {
       this.$store.commit('addMessage', message)
     })
-    socket.on('accept-clients', (clients) => {
-      this.$store.commit('addClients', clients)
+    socket.on('addUsernameToStore', (activeUsers) => {
+      this.$store.commit('addNewUser', activeUsers)
     })
   },
   methods: {
     sendMessage (message) {
       socket.emit('send-message', message)
+    },
+    addNewUser (username) {
+      socket.emit('addNewUser', username, socket.id)
     }
   },
   head () {

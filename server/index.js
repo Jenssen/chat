@@ -37,15 +37,11 @@ async function start () {
   console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
 
   // Socket io
-  let activeClients = ''
+  let activeUsers = []
   io.on('connection', (socket) => {
-    io.clients(function (error, clients) {
-      if (error) throw error
-      activeClients = clients
-      console.log(activeClients)
-    })
-    socket.on('new-user', () => {
-      io.emit('accept-clients', activeClients)
+    socket.on('addNewUser', (username, userId) => {
+      activeUsers.push({ username: username, userId: userId })
+      io.emit('addUsernameToStore', activeUsers)
     })
     socket.on('send-message', (message) => {
       io.emit('new-message', message)
