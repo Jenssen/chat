@@ -2,7 +2,6 @@
   <div class="columns is-mobile is-gapless">
     <modal @newUser="addNewUser"/>
     <user-list/>
-    {{ activeUsers }}
     <messages @emitMessage="sendMessage"/>
   </div>
 </template>
@@ -14,16 +13,19 @@ import Messages from '~components/Messages.vue'
 import UserList from '~components/UserList.vue'
 import Modal from '~components/Modal.vue'
 
-import { mapGetters } from 'vuex'
-
 export default {
   components: {
     UserList,
     Messages,
     Modal
   },
-  computed: mapGetters(['activeUsers']),
   beforeMount () {
+    socket.emit('newConnect')
+  },
+  created () {
+    socket.on('initUsers', (users) => {
+      this.$store.commit('addNewUser', users)
+    })
     socket.on('new-message', (message) => {
       this.$store.commit('addMessage', message)
     })

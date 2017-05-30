@@ -20,12 +20,8 @@ const store = () => {
         })
       },
       addNewUser (state, activeUsers) {
+        console.log(activeUsers)
         state.users = activeUsers
-      }
-    },
-    actions: {
-      nuxtServerInit (context, req) {
-        console.log(req)
       }
     }
   })

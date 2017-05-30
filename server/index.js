@@ -39,6 +39,9 @@ async function start () {
   // Socket io
   let activeUsers = []
   io.on('connection', (socket) => {
+    socket.on('newConnect', () => {
+      socket.emit('initUsers', activeUsers)
+    })
     socket.on('addNewUser', (username, userId) => {
       activeUsers.push({ username: username, userId: userId })
       io.emit('addUsernameToStore', activeUsers)

@@ -3,7 +3,7 @@
     <div class="main">
       <p class="user-header has-text-centered"><b>Users</b></p>
       <hr>
-      <p v-for="user in users" class="">
+      <p v-for="user in activeUsers" class="">
         {{ user.username }}
       </p>
     </div>
@@ -11,11 +11,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'user-list',
-  computed: {
-    users () { return this.$store.state.users }
-  }
+  computed: mapGetters(['activeUsers'])
 }
 </script>
 
