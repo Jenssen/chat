@@ -20,7 +20,6 @@ const store = () => {
         })
       },
       addNewUser (state, activeUsers) {
-        console.log(activeUsers)
         state.users = activeUsers
       }
     }
