@@ -10,7 +10,7 @@
           <form @submit.prevent="validateBeforeSubmit">
             <div class="field has-addons">
               <p class="control">
-                <input v-model.trim="userName" class="input" type="text">
+                <input v-model.trim="userName" ref="userName" class="input" type="text">
               </p>
               <p class="control">
                 <button class="button is-primary" type="submit">Enter</button>
@@ -31,6 +31,9 @@ export default {
       isActive: true,
       userName: ''
     }
+  },
+  mounted () {
+    this.$refs.userName.focus()
   },
   methods: {
     validateBeforeSubmit () {
