@@ -2,9 +2,10 @@
   <div class="column is-11-desktop is-offset-1-desktop">
     <div class="main">
       <div class="messages">
-        <p>{{ $store.state.messages }}</p>
+        <p v-for="message in $store.state.messages" class="">
+          {{ message.time }} : {{ message.username }} : {{ message.message }}
+        </p>
       </div>
-
       <div class="footer-container">
         <div class="field">
           <p class="control">
@@ -40,9 +41,7 @@ export default {
     height: 100%;
   }
   .main {
-
     width: 100%;
-
     height: 100%;
     position: fixed;
     min-height: 100%;

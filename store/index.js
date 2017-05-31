@@ -15,8 +15,9 @@ const store = () => {
     mutations: {
       addMessage (state, message) {
         state.messages.push({
-          message: message,
-          time: moment()
+          message: message.message,
+          time: moment().format('HH:mm:ss'),
+          username: message.username
         })
       },
       addNewUser (state, activeUsers) {

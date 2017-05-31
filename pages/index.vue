@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     sendMessage (message) {
-      socket.emit('send-message', message)
+      socket.emit('send-message', message, socket.id)
     },
     addNewUser (username) {
       socket.emit('addNewUser', username, socket.id)

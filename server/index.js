@@ -46,8 +46,12 @@ async function start () {
       activeUsers.push({ username: username, userId: userId })
       io.emit('addUsernameToStore', activeUsers)
     })
-    socket.on('send-message', (message) => {
-      io.emit('new-message', message)
+    socket.on('send-message', (message, userId) => {
+      var newMessage = {
+        username: activeUsers[activeUsers.map(x => x.userId).indexOf(userId)].username,
+        message: message
+      }
+      io.emit('new-message', newMessage)
     })
     socket.on('disconnect', () => {
       activeUsers = activeUsers.filter(e => e.userId !== socket.id)
