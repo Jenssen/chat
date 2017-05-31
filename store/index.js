@@ -10,6 +10,13 @@ const store = () => {
     getters: {
       activeUsers (state) {
         return state.users
+      },
+      activeUsersNumber (state) {
+        if (state.users.length) {
+          return state.users.length
+        } else {
+          return '0'
+        }
       }
     },
     mutations: {

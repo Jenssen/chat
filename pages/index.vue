@@ -19,6 +19,11 @@ export default {
     Messages,
     Modal
   },
+  computed: {
+    usersOnline () {
+      return this.$store.getters.activeUsersNumber
+    }
+  },
   beforeMount () {
     socket.emit('newConnect')
   },
@@ -43,7 +48,8 @@ export default {
   },
   head () {
     return {
-      title: 'Chat'
+      title: this.usersOnline,
+      titleTemplate: 'Chat | %s online'
     }
   }
 }
