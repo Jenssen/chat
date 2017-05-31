@@ -50,6 +50,8 @@ async function start () {
       io.emit('new-message', message)
     })
     socket.on('disconnect', () => {
+      activeUsers = activeUsers.filter(e => e.userId !== socket.id)
+      io.emit('addUsernameToStore', activeUsers)
       console.log(socket.id + 'disconnected')
     })
   })
