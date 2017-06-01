@@ -44,6 +44,7 @@ export default {
     },
     addNewUser (username) {
       socket.emit('addNewUser', username, socket.id)
+      this.$store.commit('changeStatus', true)
     }
   },
   head () {

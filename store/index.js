@@ -5,7 +5,8 @@ const store = () => {
   return new Vuex.Store({
     state: {
       users: [],
-      messages: []
+      messages: [],
+      ready: false
     },
     getters: {
       activeUsers (state) {
@@ -20,6 +21,9 @@ const store = () => {
       }
     },
     mutations: {
+      changeStatus (state, status) {
+        state.ready = status
+      },
       addMessage (state, message) {
         state.messages.push({
           message: message.message,
