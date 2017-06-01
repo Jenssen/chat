@@ -19,6 +19,7 @@ export default {
   margin: 0;
   color: #42b983;
   background-color: #282828;
+  overflow: hidden;
   }
 
   .hero {
