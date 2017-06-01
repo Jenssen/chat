@@ -35,5 +35,5 @@ module.exports = {
       }
     }
   },
-  plugins: ['~plugins/socket.io.js']
+  plugins: ['~plugins/socket.io.js', '~plugins/vee-validate.js']
 }

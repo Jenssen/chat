@@ -10,7 +10,8 @@
           <form @submit.prevent="validateBeforeSubmit">
             <div class="field has-addons">
               <p class="control">
-                <input v-model.trim="userName" ref="userName" class="input" type="text">
+                <input v-model.trim="userName" v-validate="'required'" ref="userName" class="input" type="text" name="userName">
+                <span v-show="errors.has('userName')" class="help is-danger">{{ errors.first('userName') }}</span>
               </p>
               <p class="control">
                 <button class="button is-primary" type="submit">Enter</button>
@@ -37,8 +38,12 @@ export default {
   },
   methods: {
     validateBeforeSubmit () {
-      this.isActive = false
-      this.$emit('newUser', this.userName)
+      this.$validator.validateAll().then(() => {
+        this.isActive = false
+        this.$emit('newUser', this.userName)
+      }).catch(() => {
+
+      })
     }
   }
 }

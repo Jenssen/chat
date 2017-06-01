@@ -21,7 +21,8 @@
     "nuxt": "~1.0.0-alpha1",
     "socket.io": "^2.0.1",
     "socket.io-client": "^2.0.1",
-    "source-map-support": "^0.4.15"
+    "source-map-support": "^0.4.15",
+    "vee-validate": "^2.0.0-rc.5"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
