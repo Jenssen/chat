@@ -1,10 +1,12 @@
 <template>
   <div class="column is-11-desktop is-offset-1-desktop">
     <div class="main">
-      <div class="messages">
-        <p v-for="message in $store.state.messages" class="">
-          {{ message.time }} : {{ message.username }} : {{ message.message }}
-        </p>
+      <div class="messages" ref="messagesContainer">
+        <div v-for="message in $store.state.messages" class="message-chat">
+          <p >
+            {{ message.time }} : {{ message.username }} : {{ message.message }}
+          </p>
+        </div>
       </div>
       <div class="footer-container">
         <div class="field">
@@ -26,10 +28,20 @@ export default {
       message: ''
     }
   },
+  mounted () {
+    this.scrollToBottom()
+  },
+  updated () {
+    this.scrollToBottom()
+  },
   methods: {
     emitMessage () {
       this.$emit('emitMessage', this.message)
       this.message = ''
+      this.scrollToBottom()
+    },
+    scrollToBottom () {
+      this.$refs.messagesContainer.scrollTop = this.$refs.messagesContainer.scrollHeight
     }
   }
 }
@@ -41,19 +53,26 @@ export default {
     height: 100%;
   }
   .main {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    min-height: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+  }
+  .message-chat {
+
   }
   .messages {
+    flex: 1 1 auto;
+    overflow-y: scroll;
+    overflow: auto;
+    flex-flow: column-reverse;
+    display: flex;
+    flex-direction: column;
     padding-left: 10px;
     height: 100%;
-    margin-bottom: -36px;
   }
   .footer-container {
     padding-left: -10px;
-    height: 100px;
     position: relative;
   }
   input {
