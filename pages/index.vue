@@ -13,7 +13,7 @@ import Messages from '~components/Messages.vue'
 import UserList from '~components/UserList.vue'
 import Modal from '~components/Modal.vue'
 
-const socket = io('jenssen.me:3000')
+const socket = io('jenssen.me')
 
 export default {
   components: {
