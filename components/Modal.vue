@@ -19,6 +19,7 @@
             <p class="help is-danger" v-if="(hasErrors && !this.$v.userName.required)">Field is required</p>
             <p class="help is-danger" v-if="(hasErrors && !this.$v.userName.maxLength)">Username can max have {{$v.userName.$params.maxLength.max}} letters.</p>
             <p class="help is-danger" v-if="(hasErrors && !this.$v.userName.checkExistingUsers)">Username is already taken.</p>
+            <p class="help is-danger" v-if="(hasErrors && !this.$v.userName.checkForIlligalCharacters)">Username can only have alphabetic characters, numbers, dashes or underscores</p>
           </form>
         </div>
       </nav>
@@ -30,7 +31,15 @@
 import { required, maxLength } from 'vuelidate/lib/validators'
 
 function checkExistingUsers () {
-  if (this.usersOnline.map(x => x.username).indexOf(this.userName) < 0) {
+  if (this.usersOnline.map(x => x.username.toLowerCase()).indexOf(this.userName.toLowerCase()) < 0) {
+    return true
+  } else {
+    return false
+  }
+}
+
+function checkForIlligalCharacters () {
+  if (/^[a-zA-Z0-9_-]*$/.test(this.userName)) {
     return true
   } else {
     return false
@@ -72,7 +81,8 @@ export default {
     userName: {
       required,
       maxLength: maxLength(25),
-      checkExistingUsers
+      checkExistingUsers,
+      checkForIlligalCharacters
     }
   }
 }
