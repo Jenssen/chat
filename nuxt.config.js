@@ -21,6 +21,7 @@ module.exports = {
   ** Add axios globally
   */
   build: {
+    vendor: ['socket.io-client', 'vuelidate'],
     /*
     ** Run ESLINT on save
     */
@@ -35,5 +36,5 @@ module.exports = {
       }
     }
   },
-  plugins: ['~plugins/socket.io.js', '~plugins/vee-validate.js']
+  plugins: ['~plugins/socket.io.js', '~plugins/vuelidate.js']
 }

@@ -20,7 +20,8 @@
       <div class="footer-container">
         <div class="field">
           <p class="control">
-            <input class="input" ref="messageInput" type="text" v-model="message" @keyup.enter="emitMessage" placeholder="...">
+            <span class="tag is-danger" v-if="(hasErrors && !this.$v.message.required)">Message can't be empty</span>
+            <input class="input" @input="" v-model.trim="message" ref="messageInput" type="text"  @keyup.enter="validateBeforeSubmit" placeholder="...">
           </p>
         </div>
       </div>
@@ -30,6 +31,8 @@
 </template>
 
 <script>
+import { required } from 'vuelidate/lib/validators'
+
 export default {
   name: 'messages',
   data: () => {
@@ -45,6 +48,13 @@ export default {
   computed: {
     setFocus () {
       return this.$store.state.ready
+    },
+    hasErrors () {
+      if (this.$v.message.$error) {
+        return true
+      } else {
+        return false
+      }
     }
   },
   mounted () {
@@ -54,13 +64,22 @@ export default {
     this.scrollToBottom()
   },
   methods: {
-    emitMessage () {
-      this.scrollToBottom()
-      this.$emit('emitMessage', this.message)
-      this.message = ''
+    validateBeforeSubmit () {
+      this.$v.message.$touch()
+      if (!this.$v.message.$invalid) {
+        this.scrollToBottom()
+        this.$emit('emitMessage', this.message)
+        this.message = ''
+        this.$v.message.$reset()
+      }
     },
     scrollToBottom () {
       this.$refs.messagesContainer.scrollTop = this.$refs.messagesContainer.scrollHeight
+    }
+  },
+  validations: {
+    message: {
+      required
     }
   }
 }
@@ -81,8 +100,9 @@ export default {
     flex-wrap: wrap;
     word-break: break-all
   }
-  article {
-
+  .tag {
+    color: #42b983;
+    background-color: #3c3c3c;
   }
   .messages {
     flex: 1 1 auto;

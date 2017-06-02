@@ -10,13 +10,15 @@
           <form @submit.prevent="validateBeforeSubmit">
             <div class="field has-addons">
               <p class="control">
-                <input v-model.trim="userName" v-validate="'required'" ref="userName" class="input" type="text" name="userName">
-                <span v-show="errors.has('userName')" class="help is-danger">{{ errors.first('userName') }}</span>
+                <input @input="$v.userName.$touch()" v-model.trim="userName" ref="userName" class="input" type="text">
               </p>
               <p class="control">
                 <button class="button is-primary" type="submit">Enter</button>
               </p>
             </div>
+            <p class="help is-danger" v-if="(hasErrors && !this.$v.userName.required)">Field is required</p>
+            <p class="help is-danger" v-if="(hasErrors && !this.$v.userName.maxLength)">Username can max have {{$v.userName.$params.maxLength.max}} letters.</p>
+            <p class="help is-danger" v-if="(hasErrors && !this.$v.userName.checkExistingUsers)">Username is already taken.</p>
           </form>
         </div>
       </nav>
@@ -25,6 +27,16 @@
 </template>
 
 <script>
+import { required, maxLength } from 'vuelidate/lib/validators'
+
+function checkExistingUsers () {
+  if (this.usersOnline.map(x => x.username).indexOf(this.userName) < 0) {
+    return true
+  } else {
+    return false
+  }
+}
+
 export default {
   name: 'modal',
   data: () => {
@@ -33,17 +45,34 @@ export default {
       userName: ''
     }
   },
+  computed: {
+    hasErrors () {
+      if (this.$v.userName.$error) {
+        return true
+      } else {
+        return false
+      }
+    },
+    usersOnline () {
+      return this.$store.getters.activeUsers
+    }
+  },
   mounted () {
     this.$refs.userName.focus()
   },
   methods: {
     validateBeforeSubmit () {
-      this.$validator.validateAll().then(() => {
+      if (!this.$v.userName.$invalid) {
         this.isActive = false
         this.$emit('newUser', this.userName)
-      }).catch(() => {
-
-      })
+      }
+    }
+  },
+  validations: {
+    userName: {
+      required,
+      maxLength: maxLength(25),
+      checkExistingUsers
     }
   }
 }
