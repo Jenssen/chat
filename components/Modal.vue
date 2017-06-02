@@ -8,20 +8,24 @@
       <nav class="level">
         <div class="level-item">
           <form @submit.prevent="validateBeforeSubmit">
-            <div class="field has-addons">
+            <div class="field has-addons has-addons-centered">
               <p class="control">
                 <input @input="$v.userName.$touch()" v-model.trim="userName" ref="userName" class="input" type="text">
               </p>
               <p class="control">
                 <button class="button is-primary" type="submit">Enter</button>
               </p>
+
             </div>
-            <p class="help is-danger" v-if="(hasErrors && !this.$v.userName.required)">Field is required</p>
-            <p class="help is-danger" v-if="(hasErrors && !this.$v.userName.maxLength)">Username can max have {{$v.userName.$params.maxLength.max}} letters.</p>
-            <p class="help is-danger" v-if="(hasErrors && !this.$v.userName.checkExistingUsers)">Username is already taken.</p>
-            <p class="help is-danger" v-if="(hasErrors && !this.$v.userName.checkForIlligalCharacters)">Username can only have alphabetic characters, numbers, dashes or underscores</p>
+            <div class="has-error">
+              <p class="help is-danger" v-show="(hasErrors && !this.$v.userName.required)">Field is required</p>
+              <p class="help is-danger" v-if="(hasErrors && !this.$v.userName.maxLength)">Username can max have {{$v.userName.$params.maxLength.max}} letters.</p>
+              <p class="help is-danger" v-show="(hasErrors && !this.$v.userName.checkExistingUsers)">Username is already taken.</p>
+              <p class="help is-danger" v-show="(hasErrors && !this.$v.userName.checkForIlligalCharacters)">Username can only have alphabetic characters, numbers, dashes or underscores</p>
+            </div>
           </form>
         </div>
+
       </nav>
     </div>
   </div>
@@ -90,8 +94,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .modal-content {
-    width: 450px;
+  .has-error {
+    position: fixed;
+  }
+  .help {
+    margin: 0px;
+  }
+  .field {
+    margin-bottom: 1px;
   }
   input {
     color: #42b983;
