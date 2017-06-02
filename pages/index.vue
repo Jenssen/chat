@@ -2,6 +2,7 @@
   <div class="columns is-mobile is-gapless">
     <modal @newUser="addNewUser"/>
     <user-list/>
+    <mobile-user-list/>
     <messages @emitMessage="sendMessage"/>
   </div>
 </template>
@@ -9,13 +10,15 @@
 <script>
 import socket from '~plugins/socket.io.js'
 
-import Messages from '~components/Messages.vue'
 import UserList from '~components/UserList.vue'
+import MobileUserList from '~components/MobileUserList.vue'
+import Messages from '~components/Messages.vue'
 import Modal from '~components/Modal.vue'
 
 export default {
   components: {
     UserList,
+    MobileUserList,
     Messages,
     Modal
   },

@@ -1,7 +1,7 @@
 <template>
   <div class="column is-1 is-hidden-touch">
     <div class="main">
-      <p class="user-header has-text-centered"><b>Users</b></p>
+      <p class="user-header"><b>Users</b></p>
       <hr>
       <p v-for="user in activeUsers" class="">
         {{ user.username }}
@@ -24,13 +24,14 @@ export default {
   .column {
     border-right-style: solid;
     height: 100%;
+    min-width: 200px;
   }
   .main {
     background-color: #3c3c3c;
-
     height: 100%;
     width: inherit;
     position: absolute;
+    min-width: 200px;
   }
   p {
     padding-right: 10px;
@@ -42,6 +43,7 @@ export default {
   .user-header {
     margin-top: 10px;
     font-size: 24px;
+    text-align: center;
   }
   hr {
     margin: 10px;

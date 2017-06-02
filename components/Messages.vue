@@ -1,5 +1,5 @@
 <template>
-  <div class="column is-11-desktop is-offset-1-desktop">
+  <div class="column">
     <div class="main">
       <div class="messages" ref="messagesContainer">
         <div v-for="(message, index) in $store.state.messages" class="message-chat">
@@ -113,6 +113,7 @@ export default {
     display: flex;
     flex-direction: column;
     padding-left: 10px;
+    padding-top: 5px;
     height: 100%;
 
   }
