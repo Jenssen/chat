@@ -36,5 +36,5 @@ module.exports = {
       }
     }
   },
-  plugins: [{ src: '~plugins/socket.io.js', ssr: false }, '~plugins/vuelidate.js']
+  plugins: ['~plugins/vuelidate.js']
 }

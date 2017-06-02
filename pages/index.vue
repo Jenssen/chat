@@ -7,11 +7,13 @@
 </template>
 
 <script>
-import socket from '~plugins/socket.io.js'
+import io from 'socket.io-client'
 
 import Messages from '~components/Messages.vue'
 import UserList from '~components/UserList.vue'
 import Modal from '~components/Modal.vue'
+
+const socket = io('jenssen.me:3000')
 
 export default {
   components: {
