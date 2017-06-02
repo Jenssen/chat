@@ -13,7 +13,13 @@ import Messages from '~components/Messages.vue'
 import UserList from '~components/UserList.vue'
 import Modal from '~components/Modal.vue'
 
-const socket = io('jenssen.me')
+var socket
+
+if (process.env.NODE_ENV === 'development') {
+  socket = io('127.0.0.1:3000')
+} else if (process.env.NODE_ENV === 'production') {
+  socket = io('jenssen.me')
+}
 
 export default {
   components: {
