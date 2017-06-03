@@ -114,6 +114,7 @@ export default {
     flex-direction: column;
     padding-left: 10px;
     padding-top: 5px;
+    padding-bottom: 41px;
     height: 100%;
   }
   .footer-container {
