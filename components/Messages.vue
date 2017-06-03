@@ -42,7 +42,7 @@ export default {
   },
   watch: {
     setFocus () {
-      this.$refs.messageInput.focus()
+      // this.$refs.messageInput.focus()
     }
   },
   computed: {
@@ -114,12 +114,17 @@ export default {
     flex-direction: column;
     padding-left: 10px;
     padding-top: 5px;
+    padding-bottom: 41px;
     height: 100%;
-
   }
   .footer-container {
-    padding-left: -10px;
-    position: relative;
+    display: flex;
+    position: fixed;
+    align-content: flex-end;
+    bottom: 0px;
+  }
+  .field {
+    width: 100vw;
   }
   .content {
     color: #42b983;
