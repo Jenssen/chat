@@ -115,11 +115,6 @@ export default {
     padding-left: 10px;
     padding-top: 5px;
     height: 100%;
-
-  }
-  .footer-container {
-    padding-left: -10px;
-    position: relative;
   }
   .content {
     color: #42b983;
