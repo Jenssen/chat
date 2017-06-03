@@ -116,6 +116,12 @@ export default {
     padding-top: 5px;
     height: 100%;
   }
+  .footer-container {
+    display: flex;
+  }
+  .field {
+    width: 100vw;
+  }
   .content {
     color: #42b983;
   }
