@@ -42,7 +42,7 @@ export default {
   },
   watch: {
     setFocus () {
-      this.$refs.messageInput.focus()
+      // this.$refs.messageInput.focus()
     }
   },
   computed: {
