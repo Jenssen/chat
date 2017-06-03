@@ -3,11 +3,11 @@
     <div class="modal-background"></div>
     <div class="modal-content">
       <div class="content">
-        <h1 class="has-text-centered">Please enter desired username</h1>
+        <h1 class="has-text-centered">Enter username</h1>
       </div>
       <nav class="level">
         <div class="level-item">
-          <form @submit.prevent="validateBeforeSubmit">
+          <form class="form-input" @submit.prevent="validateBeforeSubmit">
             <div class="field has-addons has-addons-centered">
               <p class="control">
                 <input @input="$v.userName.$touch()" v-model.trim="userName" ref="userName" class="input" type="text">
@@ -15,7 +15,6 @@
               <p class="control">
                 <button class="button is-primary" type="submit">Enter</button>
               </p>
-
             </div>
             <div class="has-error">
               <p class="help is-danger" v-show="(hasErrors && !this.$v.userName.required)">Field is required</p>
@@ -75,6 +74,7 @@ export default {
   },
   methods: {
     validateBeforeSubmit () {
+      this.$v.userName.$touch()
       if (!this.$v.userName.$invalid) {
         this.isActive = false
         this.$emit('newUser', this.userName)
@@ -96,12 +96,17 @@ export default {
 <style scoped>
   .has-error {
     position: fixed;
+    max-width: 285.5px;
+    padding-left: 3px;
   }
   .help {
     margin: 0px;
   }
   .field {
     margin-bottom: 1px;
+  }
+  .form-input {
+    position: relative;
   }
   input {
     color: #42b983;
@@ -112,6 +117,11 @@ export default {
   }
   h1 {
     color: #42b983;
+    font-size: 40px;
+    margin-bottom: 0px;
+  }
+  .content {
+    margin-bottom: 10px;
   }
   .button {
     color: #42b983;
