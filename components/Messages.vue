@@ -118,6 +118,9 @@ export default {
   }
   .footer-container {
     display: flex;
+    position: fixed;
+    align-content: flex-end;
+    bottom: 0px;
   }
   .field {
     width: 100vw;
