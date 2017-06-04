@@ -42,7 +42,7 @@ export default {
   },
   watch: {
     setFocus () {
-      // this.$refs.messageInput.focus()
+      this.$refs.messageInput.focus()
     }
   },
   computed: {
@@ -114,7 +114,7 @@ export default {
     flex-direction: column;
     padding-left: 10px;
     padding-top: 5px;
-    padding-bottom: 41px;
+    margin-bottom: 41px;
     height: 100%;
   }
   .footer-container {
