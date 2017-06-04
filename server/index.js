@@ -63,7 +63,12 @@ async function start () {
     socket.on('disconnect', () => {
       activeUsers = activeUsers.filter(e => e.userId !== socket.id)
       io.emit('addUsernameToStore', activeUsers)
-      console.log(socket.id + 'disconnected')
+      var botMessage = {
+        username: 'Bot',
+        message: activeUsers + ' has left.',
+        isBot: true
+      }
+      io.emit('new-message', botMessage)
     })
   })
 }
