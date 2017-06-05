@@ -7,9 +7,8 @@
           <article class="media" v-if="!message.isBot">
             <div class="media-content">
               <div class="content">
+                <small>{{ message.time }} </small><strong>{{ message.username }}</strong>
                 <p>
-                  <strong>{{ message.username }}</strong> <small> {{ message.time }}</small>
-                  <br>
                   {{ message.message }}
                 </p>
               </div>

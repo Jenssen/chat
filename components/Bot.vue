@@ -3,7 +3,7 @@
     <div class="media-content">
       <div class="content">
         <p>
-          {{ message.message }}
+          <small>{{ message.time }} </small>{{ message.message }}
         </p>
       </div>
     </div>

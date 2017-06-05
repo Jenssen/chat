@@ -61,14 +61,14 @@ async function start () {
       io.emit('new-message', newMessage)
     })
     socket.on('disconnect', () => {
-      activeUsers = activeUsers.filter(e => e.userId !== socket.id)
-      io.emit('addUsernameToStore', activeUsers)
       var botMessage = {
         username: 'Bot',
-        message: activeUsers + ' has left.',
+        message: activeUsers[activeUsers.map(x => x.userId).indexOf(socket.id)].username + ' has left.',
         isBot: true
       }
       io.emit('new-message', botMessage)
+      activeUsers = activeUsers.filter(e => e.userId !== socket.id)
+      io.emit('addUsernameToStore', activeUsers)
     })
   })
 }
