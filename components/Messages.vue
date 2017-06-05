@@ -64,8 +64,13 @@ export default {
       }
     },
     writing () {
-      let writers = this.$store.state.writing.join(', ')
-      return writers
+      let writers = this.$store.state.writing.filter(e => e.userId !== socket.id)
+      writers = writers.map(e => e.username).join(', ')
+      if (writers.length > 0) {
+        return writers
+      } else {
+        return null
+      }
     }
   },
   mounted () {

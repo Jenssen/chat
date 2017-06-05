@@ -63,12 +63,12 @@ async function start () {
       io.emit('new-message', newMessage)
     })
     socket.on('writing', (userId, state) => {
-      var isWriting = activeUsers[activeUsers.map(x => x.userId).indexOf(userId)].username
+      var isWriting = activeUsers[activeUsers.map(x => x.userId).indexOf(userId)]
       if (state && !writing.includes(isWriting)) {
         writing.push(isWriting)
         io.emit('isWriting', writing)
       } else if (!state && writing.includes(isWriting)) {
-        writing = writing.filter(e => e !== isWriting)
+        writing = writing.filter(e => e.userId !== isWriting.userId)
         io.emit('isWriting', writing)
       }
     })
