@@ -6,7 +6,8 @@ const store = () => {
     state: {
       users: [],
       messages: [],
-      ready: false
+      ready: false,
+      writing: []
     },
     getters: {
       activeUsers (state) {
@@ -33,6 +34,9 @@ const store = () => {
       },
       addNewUser (state, activeUsers) {
         state.users = activeUsers
+      },
+      writing (state, writing) {
+        state.writing = writing
       }
     }
   })

@@ -3,7 +3,7 @@
     <modal @newUser="addNewUser"/>
     <user-list/>
     <mobile-user-list/>
-    <messages @emitMessage="sendMessage"/>
+    <messages @emitMessage="sendMessage" @writing="writing"/>
   </div>
 </template>
 
@@ -40,6 +40,9 @@ export default {
     socket.on('addUsernameToStore', (activeUsers) => {
       this.$store.commit('addNewUser', activeUsers)
     })
+    socket.on('isWriting', (writing) => {
+      this.$store.commit('writing', writing)
+    })
   },
   methods: {
     sendMessage (message) {
@@ -48,6 +51,9 @@ export default {
     addNewUser (username) {
       socket.emit('addNewUser', username, socket.id)
       this.$store.commit('changeStatus', true)
+    },
+    writing (userId, state) {
+      socket.emit('writing', userId, state)
     }
   },
   head () {

@@ -38,9 +38,11 @@ async function start () {
 
   // Socket io
   let activeUsers = []
+  let writing = []
   io.on('connection', (socket) => {
     socket.on('newConnect', () => {
       socket.emit('initUsers', activeUsers)
+      socket.emit('isWriting', writing)
     })
     socket.on('addNewUser', (username, userId) => {
       activeUsers.push({ username: username, userId: userId })
@@ -52,6 +54,16 @@ async function start () {
         message: message
       }
       io.emit('new-message', newMessage)
+    })
+    socket.on('writing', (userId, state) => {
+      var isWriting = activeUsers[activeUsers.map(x => x.userId).indexOf(userId)].username
+      if (state && !writing.includes(isWriting)) {
+        writing.push(isWriting)
+        io.emit('isWriting', writing)
+      } else if (!state && writing.includes(isWriting)) {
+        writing = writing.filter(e => e !== isWriting)
+        io.emit('isWriting', writing)
+      }
     })
     socket.on('disconnect', () => {
       activeUsers = activeUsers.filter(e => e.userId !== socket.id)

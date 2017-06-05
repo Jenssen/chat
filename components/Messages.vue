@@ -21,7 +21,8 @@
         <div class="field">
           <p class="control">
             <span class="tag is-danger" v-if="(hasErrors && !this.$v.message.required)">Message can't be empty</span>
-            <input class="input" @input="" v-model.trim="message" ref="messageInput" type="text"  @keyup.enter="validateBeforeSubmit" placeholder="...">
+            <span v-if="writing" class="tag">{{ writing }} is writing...</span>
+            <input class="input" @input="isWriting" v-model.trim="message" ref="messageInput" type="text"  @keyup.enter="validateBeforeSubmit" placeholder="...">
           </p>
         </div>
       </div>
@@ -31,6 +32,7 @@
 </template>
 
 <script>
+import socket from '~plugins/socket.io.js'
 import { required } from 'vuelidate/lib/validators'
 
 export default {
@@ -55,6 +57,10 @@ export default {
       } else {
         return false
       }
+    },
+    writing () {
+      let writers = this.$store.state.writing.join(', ')
+      return writers
     }
   },
   mounted () {
@@ -69,12 +75,16 @@ export default {
       if (!this.$v.message.$invalid) {
         this.scrollToBottom()
         this.$emit('emitMessage', this.message)
+        this.$emit('writing', socket.id, false)
         this.message = ''
         this.$v.message.$reset()
       }
     },
     scrollToBottom () {
       this.$refs.messagesContainer.scrollTop = this.$refs.messagesContainer.scrollHeight
+    },
+    isWriting () {
+      this.$emit('writing', socket.id, true)
     }
   },
   validations: {
@@ -102,7 +112,18 @@ export default {
   }
   .tag {
     color: #42b983;
-    background-color: #3c3c3c;
+    background-color: #323232;
+    border-radius: 0px;
+    padding: 0px 5px 0px 5px;
+    display: inline-block;
+    border-color: #42b983;
+    border-style: solid;
+    border-width: 1px;
+    margin-right: 1px;
+  }
+  .is-danger {
+    border-color: #FF3860;
+    color: #FF3860;
   }
   .messages {
     flex: 1 1 auto;
