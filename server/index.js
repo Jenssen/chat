@@ -47,11 +47,18 @@ async function start () {
     socket.on('addNewUser', (username, userId) => {
       activeUsers.push({ username: username, userId: userId })
       io.emit('addUsernameToStore', activeUsers)
+      var botMessage = {
+        username: 'Bot',
+        message: username + ' has joined.',
+        isBot: true
+      }
+      io.emit('new-message', botMessage)
     })
     socket.on('send-message', (message, userId) => {
       var newMessage = {
         username: activeUsers[activeUsers.map(x => x.userId).indexOf(userId)].username,
-        message: message
+        message: message,
+        isBot: false
       }
       io.emit('new-message', newMessage)
     })
@@ -66,9 +73,14 @@ async function start () {
       }
     })
     socket.on('disconnect', () => {
+      var botMessage = {
+        username: 'Bot',
+        message: activeUsers[activeUsers.map(x => x.userId).indexOf(socket.id)].username + ' has left.',
+        isBot: true
+      }
+      io.emit('new-message', botMessage)
       activeUsers = activeUsers.filter(e => e.userId !== socket.id)
       io.emit('addUsernameToStore', activeUsers)
-      console.log(socket.id + 'disconnected')
     })
   })
 }

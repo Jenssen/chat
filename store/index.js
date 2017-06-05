@@ -29,7 +29,8 @@ const store = () => {
         state.messages.push({
           message: message.message,
           time: moment().format('HH:mm:ss'),
-          username: message.username
+          username: message.username,
+          isBot: message.isBot
         })
       },
       addNewUser (state, activeUsers) {

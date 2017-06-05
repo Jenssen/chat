@@ -4,17 +4,17 @@
       <div class="messages" ref="messagesContainer">
         <div v-for="(message, index) in $store.state.messages" class="message-chat">
           <hr v-if="index != 0">
-          <article class="media">
+          <article class="media" v-if="!message.isBot">
             <div class="media-content">
               <div class="content">
+                <small>{{ message.time }} </small><strong>{{ message.username }}</strong>
                 <p>
-                  <strong>{{ message.username }}</strong> <small> {{ message.time }}</small>
-                  <br>
                   {{ message.message }}
                 </p>
               </div>
             </div>
           </article>
+          <bot v-else-if="message.isBot" v-bind:message="message"/>
         </div>
       </div>
       <div class="footer-container">
@@ -35,8 +35,13 @@
 import socket from '~plugins/socket.io.js'
 import { required } from 'vuelidate/lib/validators'
 
+import Bot from '~components/Bot.vue'
+
 export default {
   name: 'messages',
+  components: {
+    Bot
+  },
   data: () => {
     return {
       message: ''
