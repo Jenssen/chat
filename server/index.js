@@ -78,9 +78,11 @@ async function start () {
         message: activeUsers[activeUsers.map(x => x.userId).indexOf(socket.id)].username + ' has left.',
         isBot: true
       }
-      io.emit('new-message', botMessage)
       activeUsers = activeUsers.filter(e => e.userId !== socket.id)
+      writing = writing.filter(e => e.userId !== socket.id)
+      io.emit('new-message', botMessage)
       io.emit('addUsernameToStore', activeUsers)
+      io.emit('isWriting', writing)
     })
   })
 }

@@ -71,7 +71,7 @@ export default {
       if (writers.length > 0) {
         return writers
       } else {
-        return null
+        return false
       }
     }
   },
@@ -96,8 +96,11 @@ export default {
       this.$refs.messagesContainer.scrollTop = this.$refs.messagesContainer.scrollHeight
     },
     isWriting () {
-      if (!this.message) {
+      if (this.message === '') {
         this.$v.message.$reset()
+        setTimeout(() => {
+          this.$emit('writing', socket.id, false)
+        }, 300)
       }
       this.$emit('writing', socket.id, true)
     }
