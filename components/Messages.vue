@@ -49,7 +49,9 @@ export default {
   },
   watch: {
     setFocus () {
-      this.$refs.messageInput.focus()
+      setTimeout(() => {
+        this.$refs.messageInput.focus()
+      }, 100)
     }
   },
   computed: {
@@ -94,6 +96,9 @@ export default {
       this.$refs.messagesContainer.scrollTop = this.$refs.messagesContainer.scrollHeight
     },
     isWriting () {
+      if (!this.message) {
+        this.$v.message.$reset()
+      }
       this.$emit('writing', socket.id, true)
     }
   },
