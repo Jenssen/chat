@@ -1,22 +1,26 @@
-# chat
+# Chat
 
-> Nuxt.js project
+Server-rendered chat application built with Nuxt, Express & Socket.io.
 
-## Build Setup
+Working demo can be found at jenssen.me
+
+## Getting Started
 
 ``` bash
 # install dependencies
-$ npm install # Or yarn install
+$ npm install
 
 # serve with hot reload at localhost:3000
 $ npm run dev
 
 # build for production and launch server
+$ npm run build
 $ npm start
 ```
 
-For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
+## Built With
 
-## Backpack
-
-We use [backpack](https://github.com/palmerhq/backpack) to watch and build the application, so you can use the latest ES6 features (module syntax, async/await, etc.).
+* [Nuxt.js](https://nuxtjs.org/) - Universal Vue.js Applications
+* [Express](http://expressjs.com/) - Minimal and flexible Node.js web application framework
+* [Socket.io](https://socket.io/) - Real-time bidirectional event-based communication
+* [Bulma](http://bulma.io/) - CSS Framework based on Flexbox
