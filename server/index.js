@@ -73,16 +73,19 @@ async function start () {
       }
     })
     socket.on('disconnect', () => {
-      var botMessage = {
-        username: 'Bot',
-        message: activeUsers[activeUsers.map(x => x.userId).indexOf(socket.id)].username + ' has left.',
-        isBot: true
+      // Check if user have logged in or not
+      if (activeUsers[activeUsers.map(x => x.userId).indexOf(socket.id)] != null) {
+        var botMessage = {
+          username: 'Bot',
+          message: activeUsers[activeUsers.map(x => x.userId).indexOf(socket.id)].username + ' has left.',
+          isBot: true
+        }
+        activeUsers = activeUsers.filter(e => e.userId !== socket.id)
+        writing = writing.filter(e => e.userId !== socket.id)
+        io.emit('new-message', botMessage)
+        io.emit('addUsernameToStore', activeUsers)
+        io.emit('isWriting', writing)
       }
-      activeUsers = activeUsers.filter(e => e.userId !== socket.id)
-      writing = writing.filter(e => e.userId !== socket.id)
-      io.emit('new-message', botMessage)
-      io.emit('addUsernameToStore', activeUsers)
-      io.emit('isWriting', writing)
     })
   })
 }
