@@ -8,12 +8,12 @@
 </template>
 
 <script>
-import socket from '~plugins/socket.io.js'
+import socket from '~/plugins/socket.io.js'
 
-import UserList from '~components/UserList.vue'
-import MobileUserList from '~components/MobileUserList.vue'
-import Messages from '~components/Messages.vue'
-import Modal from '~components/Modal.vue'
+import UserList from '~/components/UserList.vue'
+import MobileUserList from '~/components/MobileUserList.vue'
+import Messages from '~/components/Messages.vue'
+import Modal from '~/components/Modal.vue'
 
 export default {
   components: {

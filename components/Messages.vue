@@ -32,10 +32,10 @@
 </template>
 
 <script>
-import socket from '~plugins/socket.io.js'
+import socket from '~/plugins/socket.io.js'
 import { required } from 'vuelidate/lib/validators'
 
-import Bot from '~components/Bot.vue'
+import Bot from '~/components/Bot.vue'
 
 export default {
   name: 'messages',

@@ -1,4 +1,4 @@
-# express-nuxt-socketio-chat
+# chat
 
 > Nuxt.js project
 

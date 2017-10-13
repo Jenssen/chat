@@ -21,6 +21,11 @@ module.exports = {
   ** Add axios globally
   */
   build: {
+    postcss: {
+      plugins: {
+        'postcss-custom-properties': false
+      }
+    },
     vendor: ['socket.io-client', 'vuelidate'],
     /*
     ** Run ESLINT on save
