@@ -2,7 +2,7 @@
 
 Server-rendered chat application built with Nuxt, Express & Socket.io.
 
-Working demo can be found at jenssen.me
+Working demo can be found at [jenssen.me](https://jenssen.me)
 
 ## Getting Started
 
