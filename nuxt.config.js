@@ -41,5 +41,11 @@ module.exports = {
       }
     }
   },
-  plugins: [{ src: '~plugins/socket.io.js', ssr: false }, '~plugins/vuelidate.js']
+  plugins: [{ src: '~plugins/socket.io.js', ssr: false }, '~plugins/vuelidate.js'],
+  modules: [
+    ['@nuxtjs/google-analytics']
+  ],
+  'google-analytics': {
+    id: 'UA-112614930-2'
+  }
 }
